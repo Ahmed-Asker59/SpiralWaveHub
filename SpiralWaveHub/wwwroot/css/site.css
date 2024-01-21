@@ -16,3 +16,48 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.btn-primary {
+    font-weight: 500;
+    line-height: 1.5;
+    border-width: 1px;
+    text-align: center;
+    background-color: #0095e8;
+}
+/*styling patients alert command warning badge*/
+.not-found-alert, .text-bg-success {
+    background-color: #ffe999;
+}
+
+/*backgroud of an input*/
+.form-control {
+    background-color: #f3f6f9;
+}
+
+#Patients_processing {
+    width: 300px;
+    opacity: 1;
+}
+
+.healthy-badge {
+    padding-left: 30px;
+    padding-right: 30px;
+    font-size: small;
+    background-color: #e8fff3 !important;
+    color: #20c997 !important;
+}
+.parkinson-badge {
+    padding-left: 25px;
+    padding-right: 25px;
+    font-size: small;
+    background-color: #fff5f8 !important;
+    color: #f1416c !important;
+}
+
+/*styling no button in bootbox confirm*/
+.no-button {
+    background-color: #ced4da;
+}
+
+
+

@@ -1,0 +1,17 @@
+﻿@model CreateTestFormViewModel
+
+@{
+    ViewData["title"] = "Take A test";
+}
+
+<section class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateTest">
+            <div class="form-group">
+                <label class="text-muted" asp-for="TestPic"></label>
+                <input type="file" class="form-control" asp-for="TestPic" />
+                <span asp-validation-for="TestPic" class="text-danger" />
+            </div>
+        </form>
+    </div>
+</section>

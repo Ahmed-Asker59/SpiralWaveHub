@@ -1,4 +1,30 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿var dataTable;
+function showSuccessMessage(message = "Saved Successfully!") {
+    Swal.fire({
+        icon: "success",
+        title: "Success",
+        text: message,
+        confirmButtonColor: "#009ef7"
+       
+    });
+}
 
-// Write your JavaScript code.
+function showErrorMessage(message = "Something Went Wrong!") {
+    Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: message,
+        confirmButtonColor: "#dc3545"
+    });
+}
+
+function onModalSuccess() {
+    showSuccessMessage();
+    $('#Modal').modal('hide');
+    dataTable.draw();
+}
+
+function deletePatient() {
+    showSuccessMessage("Patient has been deleted successfully!");
+    dataTable.draw();
+}

@@ -1,0 +1,210 @@
+﻿@model IEnumerable<PatientViewModel>
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery antiForgery
+@{
+    ViewData["title"] = "My Patients";
+}
+<div class="card shadow-sm border-0 rounded-3">
+    <div class="card-header border-0 rounded-3" style="background-color: #ffffff;">
+        <div class="d-flex justify-content-between">
+            <div>
+                <div class="d-flex align-items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-file-medical me-2" viewBox="0 0 16 16">
+                        <path d="M8.5 4.5a.5.5 0 0 0-1 0v.634l-.549-.317a.5.5 0 1 0-.5.866L7 6l-.549.317a.5.5 0 1 0 .5.866l.549-.317V7.5a.5.5 0 1 0 1 0v-.634l.549.317a.5.5 0 1 0 .5-.866L9 6l.549-.317a.5.5 0 1 0-.5-.866l-.549.317zM5.5 9a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1z" />
+                        <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1" />
+                    </svg>
+                    <h3 class="card-title fw-medium fs-4" style="color: #181c32; outline: 0;">My Patients</h3>
+                </div>
+            </div>
+            <div class="card-toolbar">
+                <a href="javascript:;" class="btn btn-md btn-primary add-btn js-render-modal" data-title="Add Patient" data-url="/Patients/Create">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-plus-fill" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0M8.5 8a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V12a.5.5 0 0 0 1 0v-1.5H10a.5.5 0 0 0 0-1H8.5z" />
+                    </svg>
+                    Add
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+
+@if (!Model.Any())
+{
+    <!--begin::Alert-->
+    <div class="alert  bg-light-warning border border-warning d-flex flex-column flex-sm-row p-5 mb-10 not-found-alert">
+        <!--begin::Icon-->
+        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-binoculars me-4" viewBox="0 0 16 16">
+            <path d="M3 2.5A1.5 1.5 0 0 1 4.5 1h1A1.5 1.5 0 0 1 7 2.5V5h2V2.5A1.5 1.5 0 0 1 10.5 1h1A1.5 1.5 0 0 1 13 2.5v2.382a.5.5 0 0 0 .276.447l.895.447A1.5 1.5 0 0 1 15 7.118V14.5a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 14.5v-3a.5.5 0 0 1 .146-.354l.854-.853V9.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v.793l.854.853A.5.5 0 0 1 7 11.5v3A1.5 1.5 0 0 1 5.5 16h-3A1.5 1.5 0 0 1 1 14.5V7.118a1.5 1.5 0 0 1 .83-1.342l.894-.447A.5.5 0 0 0 3 4.882zM4.5 2a.5.5 0 0 0-.5.5V3h2v-.5a.5.5 0 0 0-.5-.5zM6 4H4v.882a1.5 1.5 0 0 1-.83 1.342l-.894.447A.5.5 0 0 0 2 7.118V13h4v-1.293l-.854-.853A.5.5 0 0 1 5 10.5v-1A1.5 1.5 0 0 1 6.5 8h3A1.5 1.5 0 0 1 11 9.5v1a.5.5 0 0 1-.146.354l-.854.853V13h4V7.118a.5.5 0 0 0-.276-.447l-.895-.447A1.5 1.5 0 0 1 12 4.882V4h-2v1.5a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5zm4-1h2v-.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zm4 11h-4v.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5zm-8 0H2v.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5z" />
+        </svg>
+        <!--end::Icon-->
+        <!--begin::Wrapper-->
+        <div class="d-flex flex-column pe-0 pe-sm-10">
+            <!--begin::Title-->
+            <h3 class="mb-1">No Patients Found!</h3>
+            <!--end::Title-->
+            <!--begin::Content-->
+            <span>You have got no patients assigned to you yet.</span>
+            <span>Start adding one by clicking on add button above .</span>
+            <!--end::Content-->
+        </div>
+        <!--end::Wrapper-->
+    </div>
+    <!--end::Alert-->
+}
+else
+{
+    <div class="card-body pt-0">
+            <div class="table-responsive">
+                <table id="Patients" class="table table-row-dashed table-row-gray-300 gy-2 align-middle">
+                    <thead>
+                        <tr class="fw-bold fs-6 text-gray-800">
+                            <th class="d-none"></th>
+                             <th class="ps-1">Full Name</th>
+                             <th class="ps-2">Age</th>
+                             <th >Email</th>
+                             <th class="ps-2">Last Diagnosis</th> 
+                             <th class="text-end">Action</th> 
+                        </tr> 
+                    </thead>
+                    <tbody>
+                       
+                    </tbody>
+                </table>
+            </div>
+    </div>
+    
+}
+
+<input type="hidden" name="__RequestVerificationToken" value="@antiForgery.GetAndStoreTokens(Context).RequestToken"/>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(document).ready(function () {
+            //handle modal
+            $('body').delegate('.js-render-modal', 'click', function () {
+                var btn = $(this);
+                var modal = $('#Modal');
+
+                modal.find('#ModalLabel').text(btn.data('title'));
+
+                $.get({
+                    url: btn.data('url'),
+                    success: function (form) {
+                        modal.find('.modal-body').html(form);
+                        $.validator.unobtrusive.parse(modal);
+                    },
+                    error: function () {
+                        showErrorMessage();
+                    }
+                });
+
+                modal.modal('show');
+            });
+
+            $('body').delegate('.js-delete', 'click', function () {
+                var btn = $(this);
+                bootbox.confirm({
+                    message: 'Are you sure, you want to delete this patient? all his tests will be removed too!',
+                    buttons: {
+                        confirm: {
+                            label: 'Yes',
+                            className: 'btn-danger'
+                        },
+                        cancel: {
+                            label: 'No',
+                            className: 'no-button'
+                        }
+                    },
+                    callback: function (result) {
+                        if (result) {
+                            $.post({
+                                url: '/Patients/Delete/' + btn.data('id'),
+                                data: {
+                                    '__RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val()
+                                },
+                                success: function () {
+                                    deletePatient();
+                                },
+                                error: function () {
+                                    showErrorMessage();
+                                }
+                            });
+
+                            
+                        }
+                    }
+                });
+            });
+            //datatables on server side
+           dataTable =  $('#Patients').DataTable({
+                serverSide: true,
+                processing: true,
+                stateSave: true,
+                language: {
+                    processing: '<div class="d-flex justify-content-center text-primary align-items-center dt-spinner"> <div class="spinner-border" role = "status" > <span class="visually-hidden"> Loading...</span></div > <span class="text-muted ps-2"> Loading...</span></div >'
+                },
+                search: {
+                    return :true
+                },
+                ajax: {
+                    url: '/Patients/GetPatients',
+                    type: 'POST'
+                },
+                order:[[0,'asc']],
+                columnDefs: [{
+                    targets: [0],
+                    visible: false,
+                    searchable: false
+                }],
+                columns: [
+                    {"data":"id", "name": "Id", "className": "d-none"},
+                    { "data": "fullName", "name": "FullName" },
+                    { "data": "age", "name": "Age" },
+                    { "data": "email", "name": "Email", "orderable": false },
+                    {
+                        "name": "LastDiagnosis",
+                        "orderable": false,
+                        "render": function (data, type, row) {
+                            if (row.lastDiagnosis == null)
+                                return `<span class="badge rounded-pill text-bg-light">Had No Tests yet!</span>`;
+                            if(row.lastDiagnosis == "Healthy")
+                                return `<span class="badge rounded-pill text-bg-success healthy-badge">${row.lastDiagnosis}</span>`;
+                            return `<span class="badge rounded-pill text-bg-danger parkinson-badge">${row.lastDiagnosis}</span>`;
+                               }
+                        
+                    },
+                    {
+                        "className": 'text-end',
+                        "orderable": false,
+                        "render": function (data, type, row) {
+                                    return `<!-- Example single danger button -->
+                                            <div class="btn-group">
+                                              <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Action
+                                              </button>
+                                              <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" asp-action="CreateTest" asp-route-id="${row.id}">Take a test</a></li>
+                                                <li><a class="dropdown-item js-render-modal" href="javascript:;" data-title='Edit Personal Info' data-url='/Patients/Edit/${row.id}'>Edit personal info</a></li>
+                                                <li><a class="dropdown-item" href="#">Tests Details</a></li>
+                                                <li><hr class="dropdown-divider"></li>
+                                                <li><a class="dropdown-item js-delete" href="javascript:;" data-url='/Patients/Delete/${row.id}' data-id="${row.id}">Delete Paitent</a></li>
+                                              </ul>
+                                            </div>`;
+                        }
+                    }
+                    
+                ]
+
+
+
+            });
+
+
+            
+            
+
+        });
+      
+    </script>
+}
