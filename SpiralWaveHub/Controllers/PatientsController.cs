@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+﻿using SpiralWaveHub.Services;
 using System.Linq.Dynamic.Core;
 
 namespace SpiralWaveHub.Controllers
@@ -8,7 +8,7 @@ namespace SpiralWaveHub.Controllers
         private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;
 
-        public PatientsController(ApplicationDbContext context, IMapper mapper)
+        public PatientsController(ApplicationDbContext context, IMapper mapper, IImageService imageService)
         {
             _context = context;
             _mapper = mapper;
@@ -82,17 +82,9 @@ namespace SpiralWaveHub.Controllers
             return Ok();
         }
 
-        [HttpGet]
-        public IActionResult CreateTest(int patientId)
-        {
+       
 
-            var viewModel = new CreateTestFormViewModel()
-            {
-                PatientId = patientId
-            };
-
-            return View("CreateTestForm", viewModel);
-        }
+      
 
         [HttpPost]
         public IActionResult GetPatients()
@@ -127,5 +119,7 @@ namespace SpiralWaveHub.Controllers
             };
             return Ok(jsonData);
         }
+
+       
     }
 }

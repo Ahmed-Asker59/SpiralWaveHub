@@ -4,3 +4,7 @@ global using SpiralWaveHub.Core.Models;
 global using System.Diagnostics;
 global using AutoMapper;
 global using SpiralWaveHub.Data;
+global using Microsoft.AspNetCore.Mvc.Rendering;
+global using SpiralWaveHub.Core.Consts;
+global using System.ComponentModel.DataAnnotations;
+global using UoN.ExpressiveAnnotations.NetCore.Attributes;

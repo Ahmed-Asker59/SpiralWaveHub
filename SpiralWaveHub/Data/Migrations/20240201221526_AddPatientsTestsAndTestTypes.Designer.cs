@@ -12,8 +12,8 @@ using SpiralWaveHub.Data;
 namespace SpiralWaveHub.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240118012452_AddPatientsAndTestsTables")]
-    partial class AddPatientsAndTestsTables
+    [Migration("20240201221526_AddPatientsTestsAndTestTypes")]
+    partial class AddPatientsTestsAndTestTypes
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -252,10 +252,7 @@ namespace SpiralWaveHub.Data.Migrations
                     b.Property<DateTime?>("LastTestDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("LastTestType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("NumberOfTests")
+                    b.Property<int>("NumberOfTests")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -283,29 +280,46 @@ namespace SpiralWaveHub.Data.Migrations
                     b.Property<int>("PatientId")
                         .HasColumnType("int");
 
+                    b.Property<string>("PicPath")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
                     b.Property<DateTime>("TestDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("TestPicPath")
+                    b.Property<int>("TestTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ThumbNailPath")
                         .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("TestThumbNailPath")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("TestType")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("PatientId");
 
+                    b.HasIndex("TestTypeId");
+
                     b.ToTable("Tests");
+                });
+
+            modelBuilder.Entity("SpiralWaveHub.Core.Models.TestType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TestTypes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -367,7 +381,15 @@ namespace SpiralWaveHub.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("SpiralWaveHub.Core.Models.TestType", "TestType")
+                        .WithMany()
+                        .HasForeignKey("TestTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Patient");
+
+                    b.Navigation("TestType");
                 });
 
             modelBuilder.Entity("SpiralWaveHub.Core.Models.Patient", b =>

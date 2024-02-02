@@ -30,7 +30,7 @@ body {
 }
 
 /*backgroud of an input*/
-.form-control {
+.form-control, .form-select {
     background-color: #f3f6f9;
 }
 
@@ -59,5 +59,25 @@ body {
     background-color: #ced4da;
 }
 
+.card-h, .card-f{
+    background-color: white;
+}
 
 
+.form-floating > .form-select {
+    padding-top: 1.625rem;
+    padding-bottom: 0.225rem;
+}
+
+/*styling date input*/
+.form-floating > .form-control-plaintext:focus, .form-floating > .form-control-plaintext:not(:placeholder-shown), .form-floating > .form-control:focus, .form-floating > .form-control:not(:placeholder-shown) {
+    padding-top: 1.625rem;
+    padding-bottom: .225rem;
+}
+
+.cancel-test {
+    line-height: 1.5;
+    font-weight: 500;
+    width: 109px;
+    height: 38px;
+}

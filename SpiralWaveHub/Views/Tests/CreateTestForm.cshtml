@@ -1,0 +1,95 @@
+﻿@model CreateTestFormViewModel
+
+@{
+    ViewData["title"] = "Take A test";
+}
+
+<div class="card shadow-sm">
+    <div class="card-header card-h">
+        <h3 class="card-title">Diagnose Now!</h3>
+    </div>
+    <div class="card-body">
+        <form method="post" asp-controller="Tests" asp-action="Create" enctype="multipart/form-data" id="Form">
+            <input type="hidden" asp-for="PatientId" />
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-5">
+                                <div class="form-floating mb-3">
+                                    <input type="file" asp-for="TestPic" class="form-control">
+                                    <label asp-for="TestPic">Select picture</label>
+                                </div>
+                                <span asp-validation-for="TestPic" class="text-danger d-block"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row h-10">
+                        <div class="col-md-6">
+                            <div class="mb-5">
+                                <div class="form-floating">
+                                    <select class="form-select" asp-for="TestTypeId" asp-items="@Model.TestTypes">
+                                        <option value="">Select Test Type</option>
+                                    </select>
+                                    <label asp-for="TestTypeId">Test Type</label>
+                                </div>
+                                <span asp-validation-for="TestTypeId" class="text-danger d-block"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="mb-5">
+                                <div class="form-floating mb-2">
+                                    <input type="text" class="form-control js-datepicker" placeholder="Test Date" asp-for="TestDate" />
+                                    <label asp-for="TestDate"></label>
+                                </div>
+                                <span asp-validation-for="TestDate" class="text-danger d-block"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <div id="TestPicContainer" class="d-none">
+                        <img src="" alt="Test Picture" class="img-thumbnail float-md-end" />
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+    <div class="card-footer card-f">
+        <button type="submit" class="btn btn-primary me-2" form="Form">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+                <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425z" />
+            </svg>
+            Confrim
+        </button>
+        <button type="submit" class="btn btn-danger cancel-test">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="20" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
+            </svg>
+            Cancel
+        </button>
+    </div>
+</div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(document).ready(function () {
+            $('.js-datepicker').daterangepicker({
+                singleDatePicker: true,
+                maxDate: new Date()
+            });
+            $('#TestPic').on('change', function () {
+                var selectedFile = $(this).val().split('\\').pop();
+                var testContainer = $('#TestPicContainer');
+                var img = window.URL.createObjectURL(this.files[0]);
+                testContainer.removeClass('d-none');
+                testContainer.find('img').attr('src', img);
+
+            });
+        });
+    </script>
+}

@@ -2,7 +2,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SpiralWaveHub.Core.Mapping;
 using SpiralWaveHub.Data;
+using SpiralWaveHub.Seeds;
+using SpiralWaveHub.Services;
 using System.Reflection;
+using UoN.ExpressiveAnnotations.NetCore.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,9 +17,12 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
+
+builder.Services.AddTransient<IImageService, ImageService>();
+builder.Services.AddTransient<IDiagnoseService, DiagnoseService>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(MappingProfile)));
-
+builder.Services.AddExpressiveAnnotations();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -38,7 +44,10 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
-
+var scopeFactory = app.Services.GetRequiredService<IServiceScopeFactory>();
+using var scope = scopeFactory.CreateScope();
+var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+DefaultTestTypes.Seed(context);
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

@@ -184,7 +184,7 @@ else
                                                 Action
                                               </button>
                                               <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" asp-action="CreateTest" asp-route-id="${row.id}">Take a test</a></li>
+                                                                <li><a class="dropdown-item" href="/Tests/Create?patientId=${row.id}">Take a test</a></li>
                                                 <li><a class="dropdown-item js-render-modal" href="javascript:;" data-title='Edit Personal Info' data-url='/Patients/Edit/${row.id}'>Edit personal info</a></li>
                                                 <li><a class="dropdown-item" href="#">Tests Details</a></li>
                                                 <li><hr class="dropdown-divider"></li>
