@@ -59,6 +59,19 @@
     {
       "library": "expressive-annotations-validate@2.7.0",
       "destination": "wwwroot/lib/expressive-annotations-validate/"
+    },
+    {
+      "library": "bootstrap-icons@1.11.3",
+      "destination": "wwwroot/lib/bootstrap-icons/",
+      "files": [
+        "font/fonts/bootstrap-icons.woff",
+        "font/fonts/bootstrap-icons.woff2",
+        "font/bootstrap-icons.min.css"
+      ]
+    },
+    {
+      "library": "fslightbox@3.4.1",
+      "destination": "wwwroot/lib/fslightbox/"
     }
   ]
 }

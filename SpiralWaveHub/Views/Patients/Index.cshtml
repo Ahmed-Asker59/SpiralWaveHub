@@ -102,40 +102,7 @@ else
                 modal.modal('show');
             });
 
-            $('body').delegate('.js-delete', 'click', function () {
-                var btn = $(this);
-                bootbox.confirm({
-                    message: 'Are you sure, you want to delete this patient? all his tests will be removed too!',
-                    buttons: {
-                        confirm: {
-                            label: 'Yes',
-                            className: 'btn-danger'
-                        },
-                        cancel: {
-                            label: 'No',
-                            className: 'no-button'
-                        }
-                    },
-                    callback: function (result) {
-                        if (result) {
-                            $.post({
-                                url: '/Patients/Delete/' + btn.data('id'),
-                                data: {
-                                    '__RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val()
-                                },
-                                success: function () {
-                                    deletePatient();
-                                },
-                                error: function () {
-                                    showErrorMessage();
-                                }
-                            });
-
-                            
-                        }
-                    }
-                });
-            });
+           //delete patient
             //datatables on server side
            dataTable =  $('#Patients').DataTable({
                 serverSide: true,
@@ -167,7 +134,7 @@ else
                         "orderable": false,
                         "render": function (data, type, row) {
                             if (row.lastDiagnosis == null)
-                                return `<span class="badge rounded-pill text-bg-light">Had No Tests yet!</span>`;
+                                return `<span class="badge rounded-pill text-bg-light NotAvailable-badge">No Tests yet</span>`;
                             if(row.lastDiagnosis == "Healthy")
                                 return `<span class="badge rounded-pill text-bg-success healthy-badge">${row.lastDiagnosis}</span>`;
                             return `<span class="badge rounded-pill text-bg-danger parkinson-badge">${row.lastDiagnosis}</span>`;
@@ -184,11 +151,11 @@ else
                                                 Action
                                               </button>
                                               <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item" href="/Tests/Create?patientId=${row.id}">Take a test</a></li>
+                                                <li><a class="dropdown-item" href="/Tests/Create?patientId=${row.id}">Take a test</a></li>
+                                                <li><a class="dropdown-item" href="/Tests/Index?patientId=${row.id}">All Tests</a></li>
                                                 <li><a class="dropdown-item js-render-modal" href="javascript:;" data-title='Edit Personal Info' data-url='/Patients/Edit/${row.id}'>Edit personal info</a></li>
-                                                <li><a class="dropdown-item" href="#">Tests Details</a></li>
                                                 <li><hr class="dropdown-divider"></li>
-                                                <li><a class="dropdown-item js-delete" href="javascript:;" data-url='/Patients/Delete/${row.id}' data-id="${row.id}">Delete Paitent</a></li>
+                                                <li><a class="dropdown-item js-delete" href="javascript:;" data-url='/Patients/Delete/${row.id}'  data-message="Are you sure you want to delete this paient?">Delete Paitent</a></li>
                                               </ul>
                                             </div>`;
                         }

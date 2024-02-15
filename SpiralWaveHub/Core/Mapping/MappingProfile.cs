@@ -11,7 +11,8 @@ namespace SpiralWaveHub.Core.Mapping
             CreateMap<Patient, PatientViewModel>().ReverseMap();
 
             //Tests
-            CreateMap<CreateTestFormViewModel, Test>();
+            CreateMap<TestFormViewModel, Test>().ReverseMap();
+            CreateMap<Test, TestViewModel>();
 
             //TestsTypes
             CreateMap<TestType, SelectListItem>()

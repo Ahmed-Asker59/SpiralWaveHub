@@ -54,6 +54,13 @@ body {
     color: #f1416c !important;
 }
 
+.NotAvailable-badge {
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size: small;
+    background-color: #fff8dd !important;
+    color: #ffc700 !important;
+}
 /*styling no button in bootbox confirm*/
 .no-button {
     background-color: #ced4da;
@@ -80,4 +87,13 @@ body {
     font-weight: 500;
     width: 109px;
     height: 38px;
+}
+
+.test-type {
+    color: #009ef7 !important;
+    font-weight: 500;
+}
+
+.d{
+    width:100%;
 }

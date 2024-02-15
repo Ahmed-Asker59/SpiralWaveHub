@@ -36,11 +36,14 @@ div.dataTables_wrapper div.dataTables_filter label {
   font-weight: normal;
   white-space: nowrap;
   text-align: left;
+  
 }
 div.dataTables_wrapper div.dataTables_filter input {
-  margin-left: 0.5em;
-  display: inline-block;
-  width: auto;
+    margin-left: 0.5em;
+    display: inline-block;
+    width: auto;
+    margin-bottom: 10px !important;
+    border-radius: 5%;
 }
 div.dataTables_wrapper div.dataTables_info {
   padding-top: 0.85em;

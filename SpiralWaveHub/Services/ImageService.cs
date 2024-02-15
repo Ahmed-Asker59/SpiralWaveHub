@@ -13,6 +13,32 @@ namespace SpiralWaveHub.Services
        {
             _webHostEnvironment = webHostEnvironment;
         }
+
+        public void DeleteImage(string imagePath, string thumbNailPath )
+        {
+            //get the old image path in the application to delete it
+            var oldImagePath = $"{_webHostEnvironment.WebRootPath}{imagePath}";
+            var oldThumbPath = $"{_webHostEnvironment.WebRootPath}{thumbNailPath}";
+            //delete the old image
+            if (File.Exists(oldImagePath))
+                File.Delete(oldImagePath);
+            //delete the thumbnail
+            if (File.Exists(oldThumbPath))
+                File.Delete(oldThumbPath);
+        }
+
+        public MemoryStream GetImageInStream(string imagePath)
+        {
+            var path = Path.Combine($"{_webHostEnvironment.WebRootPath}{imagePath}");
+
+            byte[] imageData = File.ReadAllBytes(path);
+
+            // Create a MemoryStream to store the image data
+            MemoryStream picStream = new MemoryStream(imageData);
+
+            return picStream;
+        }
+
         public async Task<(bool isUploaded, string? errorMessage)> UploadAsync(IFormFile image, string imageName, string folderPath)
         {
             var extension = Path.GetExtension(image.FileName);

@@ -15,6 +15,7 @@
             }
 
             HttpClient client = new HttpClient();
+            client.Timeout = TimeSpan.FromMinutes(5);
             using var form = new MultipartFormDataContent();
 
             var imageContent = new ByteArrayContent(pic.ToArray());
