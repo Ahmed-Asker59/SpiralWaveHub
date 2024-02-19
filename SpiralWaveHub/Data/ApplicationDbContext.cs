@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace SpiralWaveHub.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Patient> Patients { get; set; }
         public DbSet<Test> Tests { get; set; }

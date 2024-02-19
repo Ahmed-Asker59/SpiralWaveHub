@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace SpiralWaveHub.Core.ViewModels
+﻿namespace SpiralWaveHub.Core.ViewModels
 {
     public class PatientFormViewModel
     {
@@ -12,7 +10,8 @@ namespace SpiralWaveHub.Core.ViewModels
         public int Age { get; set; }
 
         [EmailAddress]
-        [MaxLength(150)]
+        [MaxLength(150, ErrorMessage = Errors.MaxLength)]
+        [Remote("AllowEmail", null!, AdditionalFields = "Id", ErrorMessage = Errors.Duplicated)]
         public string? Email { get; set; }
     }
 }

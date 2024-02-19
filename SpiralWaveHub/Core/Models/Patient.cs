@@ -21,5 +21,8 @@ namespace SpiralWaveHub.Core.Models
         public DateTime? LastTestDate { get; set; }
 
         public ICollection<Test> Tests { get; set; } = new List<Test>();
+
+        public string ApplicationUserId { get; set; } = null!;
+        public ApplicationUser ApplicationUser { get; set; } = null!;
     }
 }

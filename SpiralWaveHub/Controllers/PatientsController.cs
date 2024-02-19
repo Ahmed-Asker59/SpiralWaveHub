@@ -1,22 +1,35 @@
-﻿using SpiralWaveHub.Services;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using SpiralWaveHub.Services;
 using System.Linq.Dynamic.Core;
+using System.Security.Claims;
 
 namespace SpiralWaveHub.Controllers
 {
+    [Authorize]
     public class PatientsController : Controller
     {
         private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;
+        private IEmailSender _mailSender;
+        private readonly IWebHostEnvironment _webHostEnvironement;
 
-        public PatientsController(ApplicationDbContext context, IMapper mapper, IImageService imageService)
+        public PatientsController(ApplicationDbContext context, IMapper mapper, IImageService imageService, IEmailSender mailSender, IWebHostEnvironment webHostEnvironement)
         {
             _context = context;
             _mapper = mapper;
+            _mailSender = mailSender;
+            _webHostEnvironement = webHostEnvironement;
         }
 
-        public IActionResult Index()
+        public  IActionResult Index()
         {
-            var patients = _context.Patients.ToList();
+            
+          
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+            var patients = _context.Patients.
+                Where(p => p.ApplicationUserId == userId).ToList();
             var viewModel = _mapper.Map<IEnumerable<PatientViewModel>>(patients);
             return View(viewModel);
         }
@@ -35,6 +48,7 @@ namespace SpiralWaveHub.Controllers
                 return BadRequest();
 
             var patient = _mapper.Map<Patient>(model);
+            patient.ApplicationUserId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
             _context.Patients.Add(patient);
             _context.SaveChanges();
 
@@ -105,7 +119,7 @@ namespace SpiralWaveHub.Controllers
             IQueryable<Patient> patients = _context.Patients;
 
             if (!string.IsNullOrEmpty(searchValue))
-                patients = patients.Where(p => p.FullName.Contains(searchValue) || p.Email.Contains(searchValue) || p.LastDiagnosis.Contains(searchValue) );
+                patients = patients.Where(p => p.FullName.Contains(searchValue) || p.Email.Contains(searchValue) || p.LastDiagnosis.Contains(searchValue) || p.Age == int.Parse(searchValue));
 
 
             patients = patients.OrderBy($"{sortColumnName} {sortColumnDirection}");
@@ -120,6 +134,15 @@ namespace SpiralWaveHub.Controllers
             return Ok(jsonData);
         }
 
-       
+
+        public IActionResult AllowEmail(PatientFormViewModel model)
+        {
+            var patient = _context.Patients.SingleOrDefault(p => p.Email == model.Email);
+            var isAllowed = patient is null || patient.Id.Equals(model.Id);
+
+            return Json(isAllowed);
+        }
+
+
     }
 }

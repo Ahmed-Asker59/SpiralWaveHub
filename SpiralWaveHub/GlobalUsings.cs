@@ -8,3 +8,4 @@ global using Microsoft.AspNetCore.Mvc.Rendering;
 global using SpiralWaveHub.Core.Consts;
 global using System.ComponentModel.DataAnnotations;
 global using UoN.ExpressiveAnnotations.NetCore.Attributes;
+global using Microsoft.EntityFrameworkCore;
