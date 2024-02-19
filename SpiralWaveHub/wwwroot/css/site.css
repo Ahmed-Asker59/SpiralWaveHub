@@ -141,28 +141,6 @@ div.dataTables_wrapper div.dataTables_filter input {
     margin-bottom: 7px;
 }
 
-table {
-    border-collapse: separate;
-    border: solid black 1px;
-    border-radius:  6px;
-    
-}
-
-th:first-of-type {
-    border-top-left-radius: 10px;
-}
-
-th:last-of-type {
-    border-top-right-radius: 10px !important;
-}
-
-tr:last-of-type td:first-of-type {
-    border-bottom-left-radius: 10px;
-}
-
-tr:last-of-type td:last-of-type {
-    border-bottom-right-radius: 10px !important;
-}
 
 
 
