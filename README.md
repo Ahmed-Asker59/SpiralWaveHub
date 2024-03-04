@@ -12,6 +12,7 @@
 
 
 <p align="center">
+  <a href="#project-components">Project Components</a> •
   <a href="#key-features">Key Features</a> •
   <a href="#how-to-use">How To Use</a> •
 
