@@ -14,16 +14,13 @@
 <p align="center">
   <a href="#key-features">Key Features</a> •
   <a href="#how-to-use">How To Use</a> •
-  <a href="#download">Download</a> •
-  <a href="#credits">Credits</a> •
-  <a href="#related">Related</a> •
-  <a href="#license">License</a>
+
 </p>
 
 ## Project Components
-*Patient Module</br>
+* Patient Module </br>
   -Add, Edit, Delete, Search patient </br>
-*Test Module</br>
+* Test Module</br>
  -Make the patient take as many tests as you like</br>
  -keep track of patient test history
  
@@ -35,7 +32,7 @@
 * Search Patients and Apply all CRUD operations on them
 * Keep track of patients history
 
-## hoW to use
+## How to use
 * Draw a a shape of spiral or wave shape and submit it and get it diagnosed immediately
 * In the home page , you will find examples of previous draws of other patients
 
