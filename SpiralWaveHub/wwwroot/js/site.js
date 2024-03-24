@@ -24,9 +24,27 @@ function onModalSuccess() {
     dataTable.draw();
 }
 
+function onAddPatient() {
+    
+    showSuccessMessage();
+    $('#Modal').modal('hide');
+
+    var alert = $('.PatientsAlert');
+
+    if (alert.hasClass('PatientsAlert')) {
+        alert.addClass("d-none");
+    }
+       
+    dataTable.draw();
+    
+}
+
 function deletePatient() {
     showSuccessMessage("Patient has been deleted successfully!");
     dataTable.draw();
+    if (dataTable.rows().count() === 0) {
+        $(".PatientsAlert").removeClass("d-none");
+    }
 }
 
 function deleteTest(btn, result) {

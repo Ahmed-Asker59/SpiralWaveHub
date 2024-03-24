@@ -121,8 +121,9 @@ namespace SpiralWaveHub.Controllers
             if (!string.IsNullOrEmpty(searchValue))
                 patients = patients.Where(p => p.FullName.Contains(searchValue) || p.Email.Contains(searchValue) || p.LastDiagnosis.Contains(searchValue) || p.Age == int.Parse(searchValue));
 
-
-            patients = patients.OrderBy($"{sortColumnName} {sortColumnDirection}");
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+            patients = patients.Where(p => p.ApplicationUserId == userId)
+                .OrderBy($"{sortColumnName} {sortColumnDirection}");
             var data = patients.Skip(skipValue).Take(pageSize).ToList();
             var recordsTotal = _context.Patients.Count();
             var jsonData = new

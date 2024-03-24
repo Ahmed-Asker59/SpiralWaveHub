@@ -7,6 +7,8 @@
         [MaxLength(100)]
         [Display(Name = "Full Name")]
         public string FullName { get; set; } = null!;
+
+        [Range(10, 150)]
         public int Age { get; set; }
 
         [EmailAddress]

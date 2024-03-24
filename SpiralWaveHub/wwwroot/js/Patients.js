@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     myLabel.textContent = 'test';
 });
 
-/* x.getElementsByTagName('label')[0].textContet = "test";*/
+
 
 $(document).ready(function () {
    
@@ -34,6 +34,7 @@ $(document).ready(function () {
         serverSide: true,
         processing: true,
         stateSave: true,
+        fnAdjustColumnSizing: true,
         language: {
             processing: '<div class="d-flex justify-content-center text-primary align-items-center dt-spinner"> <div class="spinner-border" role = "status" > <span class="visually-hidden"> Loading...</span></div > <span class="text-muted ps-2"> Loading...</span></div >'
         },

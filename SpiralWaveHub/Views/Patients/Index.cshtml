@@ -9,9 +9,6 @@
     
  
 
-   
-
-
 <div class="card shadow-sm border-0 rounded-3">
     <div class="card-header border-0 rounded-3" style="background-color: #ffffff;">
         <div class="d-flex justify-content-between">
@@ -38,52 +35,50 @@
 <br />
 
 
-@if (!Model.Any())
-{
-    <!--begin::Alert-->
-    <div class="alert  bg-light-warning border border-warning d-flex flex-column flex-sm-row p-5 mb-10 not-found-alert">
-        <!--begin::Icon-->
-        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-binoculars me-4" viewBox="0 0 16 16">
-            <path d="M3 2.5A1.5 1.5 0 0 1 4.5 1h1A1.5 1.5 0 0 1 7 2.5V5h2V2.5A1.5 1.5 0 0 1 10.5 1h1A1.5 1.5 0 0 1 13 2.5v2.382a.5.5 0 0 0 .276.447l.895.447A1.5 1.5 0 0 1 15 7.118V14.5a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 14.5v-3a.5.5 0 0 1 .146-.354l.854-.853V9.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v.793l.854.853A.5.5 0 0 1 7 11.5v3A1.5 1.5 0 0 1 5.5 16h-3A1.5 1.5 0 0 1 1 14.5V7.118a1.5 1.5 0 0 1 .83-1.342l.894-.447A.5.5 0 0 0 3 4.882zM4.5 2a.5.5 0 0 0-.5.5V3h2v-.5a.5.5 0 0 0-.5-.5zM6 4H4v.882a1.5 1.5 0 0 1-.83 1.342l-.894.447A.5.5 0 0 0 2 7.118V13h4v-1.293l-.854-.853A.5.5 0 0 1 5 10.5v-1A1.5 1.5 0 0 1 6.5 8h3A1.5 1.5 0 0 1 11 9.5v1a.5.5 0 0 1-.146.354l-.854.853V13h4V7.118a.5.5 0 0 0-.276-.447l-.895-.447A1.5 1.5 0 0 1 12 4.882V4h-2v1.5a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5zm4-1h2v-.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zm4 11h-4v.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5zm-8 0H2v.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5z" />
-        </svg>
-        <!--end::Icon-->
-        <!--begin::Wrapper-->
-        <div class="d-flex flex-column pe-0 pe-sm-10">
-            <!--begin::Title-->
-            <h3 class="mb-1">No Patients Found!</h3>
-            <!--end::Title-->
-            <!--begin::Content-->
-            <span>You have got no patients assigned to you yet.</span>
-            <span>Start adding one by clicking on add button above .</span>
-            <!--end::Content-->
-        </div>
-        <!--end::Wrapper-->
+
+<!--begin::Alert-->
+<div class="alert  bg-light-warning border border-warning d-flex flex-column flex-sm-row p-5 mb-10 not-found-alert PatientsAlert @(!Model.Any() ? string.Empty : "d-none" )">
+    <!--begin::Icon-->
+    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-binoculars me-4" viewBox="0 0 16 16">
+        <path d="M3 2.5A1.5 1.5 0 0 1 4.5 1h1A1.5 1.5 0 0 1 7 2.5V5h2V2.5A1.5 1.5 0 0 1 10.5 1h1A1.5 1.5 0 0 1 13 2.5v2.382a.5.5 0 0 0 .276.447l.895.447A1.5 1.5 0 0 1 15 7.118V14.5a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 14.5v-3a.5.5 0 0 1 .146-.354l.854-.853V9.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v.793l.854.853A.5.5 0 0 1 7 11.5v3A1.5 1.5 0 0 1 5.5 16h-3A1.5 1.5 0 0 1 1 14.5V7.118a1.5 1.5 0 0 1 .83-1.342l.894-.447A.5.5 0 0 0 3 4.882zM4.5 2a.5.5 0 0 0-.5.5V3h2v-.5a.5.5 0 0 0-.5-.5zM6 4H4v.882a1.5 1.5 0 0 1-.83 1.342l-.894.447A.5.5 0 0 0 2 7.118V13h4v-1.293l-.854-.853A.5.5 0 0 1 5 10.5v-1A1.5 1.5 0 0 1 6.5 8h3A1.5 1.5 0 0 1 11 9.5v1a.5.5 0 0 1-.146.354l-.854.853V13h4V7.118a.5.5 0 0 0-.276-.447l-.895-.447A1.5 1.5 0 0 1 12 4.882V4h-2v1.5a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5zm4-1h2v-.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zm4 11h-4v.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5zm-8 0H2v.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5z" />
+    </svg>
+    <!--end::Icon-->
+    <!--begin::Wrapper-->
+    <div class="d-flex flex-column pe-0 pe-sm-10">
+        <!--begin::Title-->
+        <h3 class="mb-1">No Patients Found!</h3>
+        <!--end::Title-->
+        <!--begin::Content-->
+        <span>You have got no patients assigned to you yet.</span>
+        <span>Start adding one by clicking on add button above .</span>
+        <!--end::Content-->
     </div>
-    <!--end::Alert-->
-}
-else
-{
-    <div class="card-body pt-0">
-            <div class="table-responsive">
-                <table id="Patients" class="table table-row-dashed table-row-gray-300 gy-2 align-middle">
-                    <thead>
-                        <tr class="fw-bold fs-6 text-gray-800">
-                            <th class="d-none"></th>
-                             <th class="ps-1">Full Name</th>
-                             <th class="ps-2">Age</th>
-                             <th >Email</th>
-                             <th class="ps-2">Last Diagnosis</th> 
-                             <th class="text-end">Action</th> 
-                        </tr> 
-                    </thead>
-                    <tbody>
+    <!--end::Wrapper-->
+</div>
+<!--end::Alert-->
+
+
+<div class="card-body pt-0 " id="PatientsCard">
+        <div class="table-responsive">
+        <table id="Patients" class="table table-row-dashed table-row-gray-300 gy-2 align-middle ">
+                <thead>
+                    <tr class="fw-bold fs-6 text-gray-800">
+                        <th class="d-none"></th>
+                            <th class="ps-1">Full Name</th>
+                            <th class="ps-2">Age</th>
+                            <th >Email</th>
+                            <th class="ps-2">Last Diagnosis</th> 
+                            <th class="text-end">Action</th> 
+                    </tr> 
+                </thead>
+                <tbody>
                        
-                    </tbody>
-                </table>
-            </div>
-    </div>
+                </tbody>
+            </table>
+        </div>
+</div>
     
-}
+
 
 <input type="hidden" name="__RequestVerificationToken" value="@antiForgery.GetAndStoreTokens(Context).RequestToken"/>
 @section Scripts{
